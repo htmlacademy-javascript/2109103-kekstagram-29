@@ -2,6 +2,8 @@ function checkLength (string, requiredLength) {
   return string.length <= requiredLength;
 }
 
+checkLength('string', 20);
+
 function isPalindrom(string) {
   const normalizedString = string.replaceAll(' ', '').toUpperCase();
 
@@ -17,6 +19,8 @@ function isPalindrom(string) {
   return false;
 }
 
+isPalindrom('какая-то строка');
+
 function isNumber (string) {
   string = string.toString();
   let onlyNumbers = '';
@@ -29,3 +33,5 @@ function isNumber (string) {
 
   return onlyNumbers;
 }
+
+isNumber ('функция 2023');
