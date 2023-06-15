@@ -35,3 +35,24 @@ function isNumber (string) {
 }
 
 isNumber ('функция 2023');
+
+function isOutOfTimeLimit (workStart, workEnd, meetingStart, meetingTime) {
+
+  const timeStrings = [workStart, workEnd, meetingStart];
+
+  const totalMinutes = timeStrings.map((timeString) => (
+    (([hours, minutes]) => hours * 60 + minutes)(timeString.split(':').map(Number))
+  ));
+
+  totalMinutes.push(parseInt(meetingTime, 10));
+
+  if (totalMinutes[2] + meetingTime > totalMinutes[1]) {
+    return false;
+  } else if (totalMinutes[2] < totalMinutes[0]) {
+    return false;
+  }
+
+  return true;
+}
+
+isOutOfTimeLimit('08:00', '17:30', '14:00', 90);
