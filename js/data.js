@@ -42,7 +42,7 @@ const createRandomComment = () => {
 
 const createDescription = () => ({
   id: createRandomIdDescription(),
-  url: `photos/${getRandomInteger(1, 25)}.svg`,
+  url: `photos/${getRandomInteger(1, 25)}.jpg`,
   description: 'Какое-то описание. Сказано придумайте сами... Это типа пофиг какой получается?',
   likes: getRandomInteger(15, 200),
   comment: createRandomComment(),
