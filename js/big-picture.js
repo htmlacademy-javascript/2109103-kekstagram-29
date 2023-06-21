@@ -1,12 +1,10 @@
-import './miniature-list.js';
 import { isEscapeKey } from './util.js';
 
 const userBigPicture = document.querySelector('.big-picture');
-
-const userBigPictureImage = userBigPicture.querySelector('.big-picture__img');
-
-const miniatureList = document.querySelector('.pictures');
-
+const bigPictureLikes = userBigPicture.querySelector('.likes-count');
+const bigPictureCommentsCount = userBigPicture.querySelector('.comments-count');
+const bigPictureComments = userBigPicture.querySelector('.social-comments');
+const userBigPictureImage = userBigPicture.querySelector('.big-picture__img img');
 const userBigPictureClose = userBigPicture.querySelector('.cancel');
 
 const onDocumentKeyDown = (evt) => {
@@ -28,17 +26,12 @@ function closeUserModal() {
   document.removeEventListener('keydown', onDocumentKeyDown);
 }
 
-miniatureList.addEventListener('click', (evt) => {
-  if (evt.target.matches('.picture')) {
-    const miniatureUrl = evt.target.src;
-    userBigPictureImage.src = miniatureUrl;
-  }
-
-  openUserModal();
-});
+// picturesList.addEventListener('click', () => {
+//   openUserModal();
+// });
 
 userBigPictureClose.addEventListener('click', () => {
   closeUserModal();
 });
 
-export {userBigPicture};
+export { userBigPicture, userBigPictureImage, openUserModal, bigPictureLikes, bigPictureCommentsCount, bigPictureComments };

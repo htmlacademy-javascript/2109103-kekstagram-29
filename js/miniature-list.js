@@ -1,5 +1,5 @@
+import { bigPictureComments, bigPictureCommentsCount, bigPictureLikes, openUserModal, userBigPictureImage } from './big-picture.js';
 import { getRandomDescriptions } from './data.js';
-import './big-picture.js';
 
 const picturesList = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -21,9 +21,24 @@ const renderMiniatures = () => {
     pictureComments.textContent = comment.length;
 
     picturesList.appendChild(picturesElement);
+
+    picturesList.addEventListener('click', (evt) => {
+      openUserModal();
+
+      const miniatureImage = evt.target.closest('.picture__img');
+
+      if (miniatureImage) {
+        userBigPictureImage.src = miniatureImage.src;
+        bigPictureLikes.textContent = picturesLikes.textContent;
+        bigPictureCommentsCount.textContent = pictureComments.textContent;
+
+        const commentItem = bigPictureComments.cloneNode(true);
+
+      }
+    });
   });
 
   picturesList.appendChild(picturesFragment);
 };
 
-export {renderMiniatures};
+export {renderMiniatures, picturesList};
