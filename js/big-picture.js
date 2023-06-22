@@ -3,7 +3,7 @@ import { isEscapeKey } from './util.js';
 const userBigPicture = document.querySelector('.big-picture');
 const bigPictureLikes = userBigPicture.querySelector('.likes-count');
 const bigPictureCommentsCount = userBigPicture.querySelector('.comments-count');
-const bigPictureComments = userBigPicture.querySelector('.social-comments');
+const bigPictureComments = userBigPicture.querySelector('.social__comments');
 const userBigPictureImage = userBigPicture.querySelector('.big-picture__img img');
 const userBigPictureClose = userBigPicture.querySelector('.cancel');
 

@@ -54,7 +54,6 @@ const createDescription = () => {
   };
 };
 
-
 const getRandomDescriptions = () => Array.from({length: DESCRIPTIONS_COUNT}, createDescription);
 
-export {getRandomDescriptions};
+export {getRandomDescriptions, createRandomComment};
