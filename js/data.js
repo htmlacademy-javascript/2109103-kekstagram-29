@@ -24,9 +24,11 @@ const NAMES = [
 
 const DESCRIPTIONS_COUNT = 25;
 
-const createRandomIdDescription = getRandomId(1, 25);
+// const createRandomIdDescription = getRandomId(1, 25);
 
 const createRandomIdComment = getRandomId(1, 1000);
+
+const createRandomPhoto = getRandomId(1, 25);
 
 const createComment = () => ({
   id: createRandomIdComment(),
@@ -40,14 +42,18 @@ const createRandomComment = () => {
   return Array.from({length: randomCommentCount}, createComment);
 };
 
-const createDescription = () => ({
-  id: createRandomIdDescription(),
-  url: `photos/${getRandomInteger(1, 25)}.jpg`,
-  description: 'Какое-то описание. Сказано придумайте сами... Это типа пофиг какой получается?',
-  likes: getRandomInteger(15, 200),
-  comment: createRandomComment(),
-});
+const createDescription = () => {
+  const createRandomIdDescription = getRandomId(1, 25);
+
+  return {
+    id: createRandomIdDescription(),
+    url: `photos/${createRandomPhoto()}.jpg`,
+    description: 'Какое-то описание. Сказано придумайте сами... Это типа пофиг какой получается?',
+    likes: getRandomInteger(15, 200),
+    comment: createRandomComment(),
+  };
+};
 
 const getRandomDescriptions = () => Array.from({length: DESCRIPTIONS_COUNT}, createDescription);
 
-export {getRandomDescriptions};
+export {getRandomDescriptions, createRandomComment};
