@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util.js';
 
+const bodySection = document.querySelector('body');
 const userBigPicture = document.querySelector('.big-picture');
 const bigPictureLikes = userBigPicture.querySelector('.likes-count');
 const bigPictureCommentsCount = userBigPicture.querySelector('.comments-count');
@@ -16,12 +17,14 @@ const onDocumentKeyDown = (evt) => {
 
 function openUserModal() {
   userBigPicture.classList.remove('hidden');
+  bodySection.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeyDown);
 }
 
 function closeUserModal() {
   userBigPicture.classList.add('hidden');
+  bodySection.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeyDown);
 }

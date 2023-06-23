@@ -6,8 +6,6 @@ const picturesTemplate = document.querySelector('#picture').content.querySelecto
 
 const usersPictures = getRandomDescriptions();
 
-console.log(usersPictures);
-
 const renderMiniatures = () => {
   const picturesFragment = document.createDocumentFragment();
 
@@ -24,7 +22,7 @@ const renderMiniatures = () => {
 
     picturesList.appendChild(picturesElement);
 
-    picturesList.addEventListener('click', (evt) => {
+    picturesElement.addEventListener('click', (evt) => {
       openUserModal();
 
       const miniatureImage = evt.target.closest('.picture__img');
@@ -35,14 +33,24 @@ const renderMiniatures = () => {
         bigPictureCommentsCount.textContent = pictureComments.textContent;
 
         const pictureComment = bigPictureComments.querySelector('.social__comment');
-        const pictureCommentImage = pictureComment.querySelector('.social__picture');
-        const pictureCommentText = pictureComment.querySelector('.social__text');
+
+        const commentFragment = document.createDocumentFragment();
 
         comment.forEach(({ avatar, name, message }) => {
+          const commentElement = pictureComment.cloneNode(true);
+
+          const pictureCommentImage = commentElement.querySelector('.social__picture');
+          const pictureCommentText = commentElement.querySelector('.social__text');
+
           pictureCommentImage.src = avatar;
           pictureCommentImage.alt = name;
           pictureCommentText.textContent = message;
+
+          commentFragment.append(commentElement);
         });
+
+        bigPictureComments.innerHTML = '';
+        bigPictureComments.append(commentFragment);
       }
     });
   });
@@ -51,21 +59,3 @@ const renderMiniatures = () => {
 };
 
 export {renderMiniatures, picturesList};
-
-
-// const usersComments = createRandomComment();
-
-// usersComments.forEach(({ avatar, name, message}) => {
-//   const commentsList = bigPictureComments.cloneNode(true);
-//   const commentItem = commentsList.querySelector('.social__comment');
-//   const commentImage = commentItem.querySelector('.social__picture');
-//   const commentText = commentItem.querySelector('.social__text');
-
-//   commentImage.src = avatar;
-//   commentImage.alt = name;
-//   commentText.textContent = message;
-
-//   console.log(commentImage);
-
-//   usersComments.appendChild(commentsList);
-// });
