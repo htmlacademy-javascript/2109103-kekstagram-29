@@ -4,15 +4,16 @@ import { getRandomDescriptions } from './data.js';
 const picturesList = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const showMore = document.querySelector('.comments-loader');
+const pictureComment = bigPictureComments.querySelector('.social__comment');
+
 
 const usersPictures = getRandomDescriptions();
 
 let displayedComments = 5;
 
-let limitedComments = [];
-
 const renderMiniatures = () => {
   const picturesFragment = document.createDocumentFragment();
+  const commentFragment = document.createDocumentFragment();
 
   usersPictures.forEach(({ url, description, likes, comment }) => {
     const picturesElement = picturesTemplate.cloneNode(true);
@@ -27,8 +28,24 @@ const renderMiniatures = () => {
 
     picturesList.appendChild(picturesElement);
 
+    const renderComments = () => {
+      comment.slice(0, 5).forEach(({ avatar, name, message }) => {
+        const commentElement = pictureComment.cloneNode(true);
+
+        const pictureCommentImage = commentElement.querySelector('.social__picture');
+        const pictureCommentText = commentElement.querySelector('.social__text');
+
+        pictureCommentImage.src = avatar;
+        pictureCommentImage.alt = name;
+        pictureCommentText.textContent = message;
+
+        commentFragment.append(commentElement);
+      });
+    };
+
     picturesElement.addEventListener('click', (evt) => {
       openUserModal();
+      renderComments();
 
       const miniatureImage = evt.target.closest('.picture__img');
 
@@ -36,25 +53,6 @@ const renderMiniatures = () => {
         userBigPictureImage.src = miniatureImage.src;
         bigPictureLikes.textContent = picturesLikes.textContent;
         bigPictureCommentsCount.textContent = pictureComments.textContent;
-
-        const pictureComment = bigPictureComments.querySelector('.social__comment');
-
-        const commentFragment = document.createDocumentFragment();
-
-        limitedComments = comment.slice(0, displayedComments);
-
-        limitedComments.forEach(({ avatar, name, message }) => {
-          const commentElement = pictureComment.cloneNode(true);
-
-          const pictureCommentImage = commentElement.querySelector('.social__picture');
-          const pictureCommentText = commentElement.querySelector('.social__text');
-
-          pictureCommentImage.src = avatar;
-          pictureCommentImage.alt = name;
-          pictureCommentText.textContent = message;
-
-          commentFragment.append(commentElement);
-        });
 
         bigPictureComments.innerHTML = '';
         bigPictureComments.append(commentFragment);
@@ -68,8 +66,3 @@ const renderMiniatures = () => {
 renderMiniatures();
 
 export {renderMiniatures, picturesList};
-
-
-// задокументирую проблему
-// сначала генерируются миниатюры (а следовательно и комментарии)
-// и только потом я пытаюсь обновить displayedComments!!!
