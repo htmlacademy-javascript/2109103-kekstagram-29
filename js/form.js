@@ -7,6 +7,42 @@ const imageEditField = document.querySelector('.img-upload__overlay');
 const buttonCloseUpload = document.querySelector('.cancel');
 const commentField = document.querySelector('.text__description');
 const hashtagField = document.querySelector('.text__hashtags');
+const errorUploadWindow = document.querySelector('#error').content.querySelector('.error');
+
+const errorWindow = errorUploadWindow.cloneNode(true);
+
+const pristine = new Pristine(uploadForm);
+
+const onDocumentEscErrorWindow = (evt) => {
+  if (isEscapeKey) {
+    evt.preventDefault();
+    errorWindow.remove();
+  }
+};
+
+function removeErrorWindow () {
+  errorWindow.remove();
+  document.addEventListener('keydown', onDocumentEscErrorWindow);
+}
+
+const renderErrorWindow = () => {
+  const errorButton = errorWindow.querySelector('.error__button');
+
+  bodySection.append(errorWindow);
+
+  errorButton.addEventListener('click', removeErrorWindow);
+};
+
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    console.log('Можно отправлять');
+  } else {
+    renderErrorWindow();
+  }
+});
 
 const onDocumentEsc = (evt) => {
   const nonClosingElements = [commentField, hashtagField];
