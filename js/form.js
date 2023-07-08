@@ -1,4 +1,5 @@
 import { bodySection } from './big-picture.js';
+import { sliderContainer } from './picture-filters.js';
 import { isEscapeKey } from './util.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
@@ -104,6 +105,7 @@ const onDocumentEsc = (evt) => {
 
 function openImageUpload () {
   imageEditField.classList.remove('hidden');
+  sliderContainer.classList.add('hidden');
   bodySection.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentEsc);

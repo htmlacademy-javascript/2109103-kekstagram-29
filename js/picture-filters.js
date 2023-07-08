@@ -42,12 +42,14 @@ addScaleBiggerClick();
 const effectsList = document.querySelector('.effects__list');
 const effectSlider = document.querySelector('.effect-level__slider');
 const effectValue = document.querySelector('.effect-level__value');
+const sliderContainer = document.querySelector('.img-upload__effect-level');
 
 noUiSlider.create(effectSlider, {
   range: {
     min: 0,
     max: 100,
   },
+
   start: 100,
   connect: 'lower',
 });
@@ -57,6 +59,8 @@ effectSlider.noUiSlider.on('update', () => {
 });
 
 effectsList.addEventListener('change', (evt) => {
+  sliderContainer.classList.remove('hidden');
+
   if (evt.target.id === 'effect-chrome') {
     effectSlider.noUiSlider.updateOptions({
       range: {
@@ -123,8 +127,13 @@ effectsList.addEventListener('change', (evt) => {
     });
 
     imagePreview.style.filter = `brightness(${effectSlider.noUiSlider.get()})`;
+  } else if (evt.target.id === 'effect-none') {
+    imagePreview.style.filter = 'initial';
+    sliderContainer.classList.add('hidden');
   }
 });
+
+export { sliderContainer };
 
 // По умолчанию должен быть выбран эффект «Оригинал».
 // На изображение может накладываться только один эффект.
