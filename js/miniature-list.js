@@ -1,11 +1,11 @@
 import { userBigPicture, bigPictureComments, bigPictureCommentsCount, bigPictureLikes, openUserModal, userBigPictureImage } from './big-picture.js';
-import { getRandomDescriptions } from './data.js';
 
 const picturesList = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const showMore = document.querySelector('.comments-loader');
 const pictureComment = bigPictureComments.querySelector('.social__comment');
 const commentCountFromTo = userBigPicture.querySelector('.social__comment-count');
+const imageDescription = userBigPicture.querySelector('.social__caption');
 
 let limitedComments = [];
 
@@ -76,6 +76,8 @@ const renderMiniatures = (usersPictures) => {
           displayedComments = 5;
         }
         renderComments();
+
+        imageDescription.textContent = description;
       }
 
       picturesElement.removeEventListener('click', onMiniatureClick);
