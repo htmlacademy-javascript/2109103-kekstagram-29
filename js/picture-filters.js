@@ -55,18 +55,19 @@ noUiSlider.create(effectSlider, {
 });
 
 effectSlider.noUiSlider.on('update', () => {
-  effectValue.value = effectSlider.noUiSlider.get();
+  const currentValue = effectSlider.noUiSlider.get();
+  effectValue.value = currentValue;
 
   if (effectsList.querySelector('#effect-chrome').checked) {
-    imagePreview.style.filter = `grayscale(${effectSlider.noUiSlider.get()})`;
+    imagePreview.style.filter = `grayscale(${currentValue})`;
   } else if (effectsList.querySelector('#effect-sepia').checked) {
-    imagePreview.style.filter = `sepia(${effectSlider.noUiSlider.get()})`;
+    imagePreview.style.filter = `sepia(${currentValue})`;
   } else if (effectsList.querySelector('#effect-marvin').checked) {
-    imagePreview.style.filter = `invert(${effectSlider.noUiSlider.get()}%)`;
+    imagePreview.style.filter = `invert(${currentValue}%)`;
   } else if (effectsList.querySelector('#effect-phobos').checked) {
-    imagePreview.style.filter = `blur(${effectSlider.noUiSlider.get()}px)`;
+    imagePreview.style.filter = `blur(${currentValue}px)`;
   } else if (effectsList.querySelector('#effect-heat').checked) {
-    imagePreview.style.filter = `brightness(${effectSlider.noUiSlider.get()})`;
+    imagePreview.style.filter = `brightness(${currentValue})`;
   }
 });
 
