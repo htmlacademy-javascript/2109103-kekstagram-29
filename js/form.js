@@ -83,6 +83,7 @@ const onDocumentEsc = (evt) => {
 
   if (isEscapeKey && !nonClosingElements.includes(document.activeElement)) {
     evt.preventDefault();
+    uploadForm.reset();
     imageEditField.classList.add('hidden');
   }
 };
